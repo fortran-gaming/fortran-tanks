@@ -1,7 +1,7 @@
 module game
 
 use utils, only : rand, sleep
-use, intrinsic :: iso_fortran_env, only : stdin=>input_unit
+use, intrinsic :: iso_fortran_env, only : stdin=>input_unit, stderr=>error_unit
 
 implicit none (type, external)
 
@@ -11,7 +11,7 @@ character, allocatable :: grid(:,:)
 REAL :: w_l
 
 integer, parameter :: nrows = 50, ncolumns = 100
-integer ::  t_c1, t_c2, hit_count, win, tank_column, tank_row
+integer ::  t_c1, t_c2, hit_count, win, tank_column, tank_row, ierr
 integer :: x(23), y(23)
 INTEGER :: n_shots, angle, velocity, wind_speed, wind_direction, score, clock, bomb, load_space
 REAL :: h, rise, h_w
@@ -41,20 +41,25 @@ print '(A)', "         (/\/\/\/\/\/\/\/\/\/\/\/\/)"
 
 print '(/,/,/,/,/,/,A,/)', "Choose a Level for Wind:  (L)ow  |  (M)edium  |  (H)igh"
 
-READ (stdin,"(A1)") response
-select case (response)
-case ("L","l")
-w_l = 0.01
-wind_level = "Low"
-case ("M","m")
-w_l = 0.03
-wind_level = "Medium"
-case ("H","h")
-w_l = 0.07
-wind_level = "High"
-case default
-error stop "invalid response: " // response
-END select
+wind_level = ""
+
+do while (wind_level=="")
+  read(stdin,'(A1)') response
+
+  select case (response)
+  case ("L","l")
+  w_l = 0.01
+  wind_level = "Low"
+  case ("M","m")
+  w_l = 0.03
+  wind_level = "Medium"
+  case ("H","h")
+  w_l = 0.07
+  wind_level = "High"
+  case default
+  write(stderr,*) "invalid response: " // response
+  END select
+end do
 
 end subroutine start_game
 

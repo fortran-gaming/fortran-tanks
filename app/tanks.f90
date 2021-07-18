@@ -40,17 +40,19 @@ CALL game_display()
 print '(/,A,/)', "Select an Option:   (A)ngle   |   (V)elocity   |   (F)ire"
 READ(stdin,"(A)", iostat=i) menu_command
 if(is_iostat_end(i)) stop "thanks for playing"
-if(i/=0) cycle
+if(i/=0) cycle main
 
 select case (menu_command)
 case ("A","a")
   print '(/,/,A,I3,/,A,/)',"Your CURRENT Angle: ", angle, "Enter Angle   |   (0 > angle > 180)"
-  READ(stdin, "(I3)") angle
+  READ(stdin, "(I3)", iostat=i) angle
+  if(i/=0) cycle main
   IF (angle < 0) angle = 0
   if (angle > 180) angle = 180
 case ("V","v")
   print '(/,/,A,I3,/,A,/)', " Your CURRENT Velocity: ", velocity, "Enter Velocity   |   (20 <= velocity <= 100)"
-  READ (stdin, "(I3)") velocity
+  READ (stdin, "(I3)", iostat=i) velocity
+  if(i/=0) cycle main
   IF (velocity < 20) velocity = 20
   if (velocity > 100) velocity = 100
 case ("B","b")
