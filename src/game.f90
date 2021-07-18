@@ -166,9 +166,7 @@ REAL :: time(100000), range(100000), altitude(100000), accel_x, sim_angle, time_
 INTEGER :: step_final
 INTEGER :: i, j, k, l, m
 
-integer :: ptime
-
-ptime = 10
+integer, parameter :: ptime = 10, ptime2 = 100
 
 i = 1
 time = 0
@@ -196,7 +194,7 @@ DO k = 1, step_final
   IF (grid(i,j+tank_column) == " ") THEN
     grid(i,j+tank_column) = "*"
     CALL game_display()
-    CALL sleep(int(speed(i)))
+    CALL sleep(int(0.2*speed(i)))
   ELSE IF (grid(i,j+tank_column) == "~") THEN
     grid(i,j+tank_column) = "*"
     CALL game_display()
@@ -233,7 +231,7 @@ DO k = 1, step_final
     IF (i-1 < nrows) grid(i-1,j+tank_column-1) = "*"
     CALL game_display()
     IF (bomb == 1) THEN
-      CALL sleep(100)
+      CALL sleep(ptime2)
       DO l = -2, 2
       DO m = -2, 2
         IF (grid(i+l,j+tank_column+m) == "X") hit_count = 1
@@ -241,7 +239,7 @@ DO k = 1, step_final
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -3, 3
       DO m = -3, 3
         IF (grid(i+l,j+tank_column+m) == "X") hit_count = 1
@@ -249,14 +247,14 @@ DO k = 1, step_final
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -2, 2
       DO m = -2, 2
         IF (grid(i+l,j+tank_column+m) == "*") grid(i+l,j+tank_column+m) = " "
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -4, 4
       DO m = -4, 4
         IF (grid(i+l,j+tank_column+m) == "X") hit_count = 1
@@ -264,14 +262,14 @@ DO k = 1, step_final
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -3, 3
       DO m = -3, 3
         IF (grid(i+l,j+tank_column+m) == "*") grid(i+l,j+tank_column+m) = " "
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -5, 5
       DO m = -5, 5
         IF (grid(i+l,j+tank_column+m) == "X") hit_count = 1
@@ -279,7 +277,7 @@ DO k = 1, step_final
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -4, 4
       DO m = -4, 4
         IF (grid(i+l,j+tank_column+m) == "*") grid(i+l,j+tank_column+m) = " "
@@ -317,49 +315,49 @@ DO k = 1, step_final
     CALL game_display()
     hit_count = 1
     IF (bomb == 1) THEN
-      CALL sleep(100)
+      CALL sleep(ptime2)
       DO l = -2, 2
       DO m = -2, 2
         IF (i+l < nrows) grid(i+l,j+tank_column+m) = "*"
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -3, 3
       DO m = -3, 3
         IF (i+l < nrows) grid(i+l,j+tank_column+m) = "*"
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -2, 2
       DO m = -2, 2
         IF (grid(i+l,j+tank_column+m) == "*") grid(i+l,j+tank_column+m) = " "
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -4, 4
       DO m = -4, 4
         IF (i+l < nrows) grid(i+l,j+tank_column+m) = "*"
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -3, 3
       DO m = -3, 3
         IF (grid(i+l,j+tank_column+m) == "*") grid(i+l,j+tank_column+m) = " "
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -5, 5
       DO m = -5, 5
         IF (i+l < nrows) grid(i+l,j+tank_column+m) = "*"
       END DO
     END DO
     CALL game_display()
-    CALL sleep(100)
+    CALL sleep(ptime2)
     DO l = -4, 4
       DO m = -4, 4
         IF (grid(i+l,j+tank_column+m) == "*") grid(i+l,j+tank_column+m) = " "
