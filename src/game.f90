@@ -114,7 +114,7 @@ h = h + rise
 END DO
 print '(/,/,/,/,/,/,/)'
 DO i = 1, nrows
-  WRITE (*,*) (grid(i,j), j = 1, ncolumns)
+  print *, (grid(i,j), j = 1, ncolumns)
 END DO
 tank_column = NINT(rand()*ncolumns*0.9)+5
 DO i = 1, nrows
@@ -416,12 +416,12 @@ END DO
 END DO
 IF (l == 0) win = 1
 IF (k == 0) win = -1
-WRITE (*,*)
+
 IF (win == -1) THEN
-  WRITE (*,*) "*KABOOM*"
+  print *, "*KABOOM*"
 ELSE
-  IF (hit_count == 0) WRITE (*,*) "~MISS~"
-  IF (hit_count == 1) WRITE (*,*) "HIT!"
+  IF (hit_count == 0) print *, "~MISS~"
+  IF (hit_count == 1) print *, "HIT!"
 END IF
 print '(A)', "press Enter to continue"
 READ (*,*)
@@ -435,17 +435,15 @@ integer :: i,j
 
 print '(/,/,/,/,/,/,/)'
 DO i = 1, nrows
-  WRITE (*,*) (grid(i,j), j = 1, ncolumns)
+  print *, (grid(i,j), j = 1, ncolumns)
 END DO
 IF (wind_direction == 0) wind_display = "WEST"
 IF (wind_direction == 1) wind_display = "EAST"
 score = 100.99999 - (0.333*(50-n_shots))**1.637
 IF (bomb == 0) THEN
-  WRITE (*,*)
   WRITE (*,18) angle, velocity, wind_speed, wind_display, n_shots, score
   18 FORMAT (1X,"Angle: ",I3,3X,"Velocity: ",I3,3X,"Wind: ",I2,1X,A4,3X,"Shots Remaining: ",I2,3X,"Current Score: ",I3)
 ELSE
-  WRITE (*,*)
   WRITE (*,180) angle, velocity, wind_speed, wind_display, n_shots, score, "B-O-M-B"
   180 FORMAT (1X,"Angle: ",I3,3X,"Velocity: ",I3,3X,"Wind: ",I2,1X,A4,3X,"Shots Remaining: ",I2,3X,"Current Score: ",I3,5X,A7)
 END IF

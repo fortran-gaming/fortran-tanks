@@ -20,7 +20,7 @@ call generate_grid()
 
 print '(/,/,/,/,/,/,/)'
 DO i = 1, nrows
-  WRITE (*,*) (grid(i,j), j = 1, ncolumns)
+  print *, (grid(i,j), j = 1, ncolumns)
 END DO
 
 n_shots = 50
@@ -75,15 +75,15 @@ END DO main
 
 print '(/,/,/,/,/,/,/)'
 DO i = 1, nrows
-  WRITE (*,*) (grid(i,j), j = 1, ncolumns)
+  print *, (grid(i,j), j = 1, ncolumns)
 END DO
 
 select case (win)
 case (0)
-  WRITE (*,*) "Maybe Next Time ", TRIM(player_name), "..."
+  print *, "Maybe Next Time ", TRIM(player_name), "..."
   score = 0
 case(1)
-  WRITE (*,*) "You Won ", TRIM(player_name), "!"
+  print *, "You Won ", TRIM(player_name), "!"
   print '(/,A,I3,/)', " Final Score: ", score
 case default
   print '(A,/,A)', "Way to go man! :)", "You blew up your Tank!"
